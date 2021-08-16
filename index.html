@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <title>Time table project</title>
+</head>
+
+<body>
+  <!-- This is our navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Elderny Timoer</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li> -->
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div id="main_body" class="container my-3">
+    <h1>Timetable Maker</h1>
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex center_itm">
+          <div class="mb-3">
+            <h6 class="card-title">Routine name</h6>
+            <input type="text" class="form-control" id="routine_name">
+          </div>
+          <div class="mb-3 mx-5">
+            <h6 class="text-center">Wakeup Time</h6>
+            <input type="text" class="form-control" id="wakeup_time" placeholder="05:00">
+          </div>
+          <div class="mb-3">
+            <h6 class="text-center">Sleep Time</h6>
+            <input type="text" class="form-control" id="sleep_time" placeholder="21:00">
+          </div>
+          <div class="mb-3 mx-5">
+            <h6 class="text-center">Current Time</h6>
+            <input type="text" class="form-control text-center" id="current_time" disabled>
+          </div>
+        </div>
+        <p>*It's required to add all details related to routine for the first time only</p>
+        <div >
+          <!-- <hr> -->
+          <h6>Select Routine</h6>
+          <select id="select_routine" class="form-select" aria-label="Default select example" disabled="disabled">
+            <option id="routine_empty">Current</option>
+          </select>
+          <hr class="my-4">
+        </div>
+        <h4>Add To do's in routine</h4><br>
+        <div class="d-flex">
+          <div class="mb-3 text-center" style="width: 60%;">
+            <h6 class="card-title">Note name</h6>
+            <input type="text" class="form-control" id="Notename" placeholder="To do Title">
+          </div>
+          <div class="mb-3 mx-5 text-center">
+            <h6 class="card-title">Time length</h6>
+            <input type="text" class="form-control" id="TimeLen" placeholder="Todo Time">
+          </div>
+          <div id="select_routine">
+            <h6>Get Notified</h6>
+            <select class="form-select" aria-label="Default select example" id="notification">
+              <option selected id="Notify_1">Yes</option>
+              <option id="Notify_0">No</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="submit_timetable text-center">
+          <button class=" btn btn-primary todo_adder" id="addBtn">Add To do</button>
+        </div>
+      </div>
+    </div>
+    <h2 class="my-2 text-center ">Routines</h2>
+    <div id="todoSpace">
+
+    </div>
+    <!-- <div class="card my-3">
+      <div class="card-header">
+        <b>Routine Name: </b>
+      </div>
+      <div class="card-body">
+        <span class="d-flex">
+          <span class="w-50">
+            <h5 class="card-title">Time Table</h5>
+          </span>
+          <span class="w-50" style="position: relative;">
+            <p class="total_time">Total Time Left: </p>
+          </span>
+        </span>
+        <div class="form-check">
+          <div id="routine_todos" class="d-flex routine_todos">
+            <span class="d-flex nopad">
+              <span class="routine_note_time">
+                <p>12:20 => </p>
+              </span>
+              <span>
+                <input class="form-check-input" type="checkbox" value="">hey
+              </span>
+            </span>
+          </div>
+        </div>
+        <br>
+        <a href="#" class="btn btn-primary">Delete</a>
+      </div>
+    </div> -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+    <script src="js/main.js"> </script>
+</body>
+
+</html>
