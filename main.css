@@ -1,0 +1,31 @@
+body{
+    margin:0px;
+    padding:0px;
+}
+
+/* Css for add button */
+.todo_adder{
+    width: 15%;
+}
+
+
+/* Card Total Time */
+.total_time{
+    position: absolute;
+    right: 0px;
+    top:0px;
+}
+
+/* For routine_todos */
+.routine_todos{
+    flex-direction: column;
+}
+.routine_note_time{
+    position: relative;
+    left:0px;
+    width: 9%;
+}
+.nopad{
+    padding: 0px !important;
+    margin:0px !important;
+}
