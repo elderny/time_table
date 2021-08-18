@@ -29,3 +29,10 @@ body{
     padding: 0px !important;
     margin:0px !important;
 }
+.time_edit_span{
+    display: flex;
+    margin-left: 1.5%;
+    margin-right: 10%;
+    position: absolute;
+    left: 60%;
+}
