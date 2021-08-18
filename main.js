@@ -6,8 +6,7 @@ function C_time() {
 setInterval(() => {
     C_time();
 }, 1000);
-validation();
-showTodos();
+
 //Can select current time
 function validation() {
     let select_routine = document.getElementById('select_routine');
@@ -42,48 +41,58 @@ function added_validation(title) {
         console.log('not added');
     }
 }
-function no_name_validator(check) {
-
-}
 
 
-//Function to get total time
-function Ttl_time(totalTime) {
-    let getTime = new Date().toLocaleTimeString('en-GB');
-    let tt_time = new Date(totalTime);
-    let timeLeft = getTime - tt_time;
-    if (timeLeft <= 0) {
-        return "Time Out";
-    } else if (timeLeft >= 24) {
-        return "Invalid Time";
-    } else {
-        return timeLeft;
+function Total_time(future) {
+    let day = 0;
+    let today = new Date();
+    let today_parsed = Date.parse(today);
+    diff = future - today_parsed; //Difference in milliseconds
+    hr_diff = Math.floor(diff / 3600000), min_diff = Math.floor(diff % 3600000 / 60000);
+    // return `${hr_diff} ${min_diff}`;
+    min_diff_str = (min_diff < 10) ? `0${min_diff}` : `${min_diff}`;
+    if (hr_diff > 24) {
+        day++;
+        hr_diff = hr_diff - 25;
+        return `${day} day ${hr_diff}:${min_diff_str} hr`
     }
+    if (hr_diff != 0 && min_diff == 0) {
+        return `${hr_diff} hours`;
+    }
+    if (hr_diff == 0) {
+        return `${min_diff_str} minutes`
+    }
+    if (hr_diff * 60 - min_diff <= 0) return `Time Over`;
+    return `${hr_diff}.${min_diff_str} hr`;
 }
-function Total_time(totalTime) {
-    Ttl_time(totalTime);
-}
-
-// Function to calculate wakeup and sleep time difference
 function wake_sleep(wakeTime, sleepTime) {
     return sleepTime - wakeTime;
 }
 //Function to add Routine and To do's
 addBtn.addEventListener("click", add_btn);
 function add_btn() {
-    console.log('added');
     //adding elements
     let routine_name = document.getElementById('routine_name');
     let wakeup_time = document.getElementById('wakeup_time');
     let sleep_time = document.getElementById('sleep_time');
     let select_routine = document.getElementById('routine_name');
     let Notename = document.getElementById('Notename');
-    let TimeLen = document.getElementById('TimeLen');
+    let user_hr_in = document.getElementById('user_hr');
+    let user_min_in = document.getElementById('user_min');
     let notification = document.getElementById('notification');
-    let addBtn = document.getElementById('addBtn');
 
     let time_diff = wake_sleep(wakeup_time, sleep_time);
 
+    //Variables for getting TotalTime
+    let future = new Date();
+    let user_hr = parseInt(user_hr_in.value);
+    let user_min = parseInt(user_min_in.value);
+    user_hr = (isNaN(user_hr)) ? 0 : parseInt(user_hr_in.value);
+    user_min = (isNaN(user_min)) ? 0 : parseInt(user_min_in.value);
+    let real_hr = future.getHours();
+    let real_min = future.getMinutes();
+    future.setHours(real_hr + user_hr, real_min + user_min);
+    let future_parsed = Date.parse(future);
     let todos = localStorage.getItem("todos")
     // Check if conditions are met or not
     if (todos == null) {
@@ -96,7 +105,7 @@ function add_btn() {
         time_diff: time_diff,
         routine: select_routine.checked,
         name: Notename.value,
-        time: TimeLen.value,
+        total_time: future_parsed,
         notification: notification,
         curtime: current_time.value,
     };
@@ -114,12 +123,10 @@ function showTodos() {
     } else {
         todosObj = JSON.parse(todos);
     }
-
     let todospace = document.getElementById('todoSpace');
     let todosCard = "";
     let todosCard2 = "";
     todosObj.forEach((todo, index) => {
-        console.log(Total_time(todo.time));
         todosCard += `
        <div class="card my-3">
        <div class="card-header">
@@ -131,7 +138,7 @@ function showTodos() {
              <h5 class="card-title">Time Table</h5>
            </span>
            <span class="w-50" style="position: relative;">
-             <p class="total_time" id="totalTime_${index}">Total Time Left: ${Total_time(todo.time)}</p>
+             <p class="total_time" id="totalTime_${index}">Total Time Left: <b>${Total_time(todo.total_time)}</b></p>
            </span>
          </span>
          <div class="form-check">
@@ -176,3 +183,8 @@ function deletetodo(index) {
     localStorage.setItem("todos", JSON.stringify(todosObj));
     showTodos();
 }
+validation();
+showTodos();
+setInterval(() => {
+    showTodos();
+}, 60000);
